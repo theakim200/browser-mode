@@ -4,17 +4,17 @@ console.log("Hi");
 function detectBrowser() {
     const userAgent = navigator.userAgent;
     
-    if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edg") === -1 && userAgent.indexOf("Safari") > -1) {
-        // Chrome (Safari도 포함하므로 추가 체크 필요)
-        if (userAgent.indexOf("Chrome") > -1) {
-            return "chrome";
-        }
-    } else if (userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") === -1) {
-        // Safari
-        return "safari";
-    } else if (userAgent.indexOf("Firefox") > -1) {
-        // Firefox
+    // Firefox 먼저 체크
+    if (userAgent.indexOf("Firefox") > -1) {
         return "firefox";
+    }
+    // Chrome 체크 (Edge 제외)
+    else if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edg") === -1) {
+        return "chrome";
+    }
+    // Safari 체크 (Chrome이 없을 때만)
+    else if (userAgent.indexOf("Safari") > -1) {
+        return "safari";
     }
     
     // 기본값
@@ -35,4 +35,15 @@ if (browser === "chrome") {
     document.querySelectorAll(".bb").forEach(img => img.classList.remove("hide"));
 } else if (browser === "firefox") {
     document.querySelectorAll(".cc").forEach(img => img.classList.remove("hide"));
+}
+
+// 브라우저에 따라 배너 텍스트 변경
+const bannerText = document.querySelector(".banner p");
+
+if (browser === "chrome") {
+    bannerText.textContent = "You are in Chrome.";
+} else if (browser === "safari") {
+    bannerText.textContent = "You are in Safari.";
+} else if (browser === "firefox") {
+    bannerText.textContent = "You are in Firefox.";
 }

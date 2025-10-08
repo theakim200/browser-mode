@@ -1,113 +1,166 @@
-/* 기본 배경 */
+/* 기본 리셋 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* 스크롤 방지 */
+}
+
+/* 전체 화면 배경 + flex 컨테이너 */
 body {
-    margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
 }
 
-/* A - Chrome */
+/* --- 브라우저별 배경 그라데이션 --- */
 body.chrome {
-    background: linear-gradient(180deg, #F23121 0%, #D23428 14%, #A03831 27.5%, #6E2F2C 50.5%, #63506B 72.5%, #536AAD 86%, #4478E6 100%);
+  background: linear-gradient(
+    180deg,
+    #F23121 0%,
+    #D23428 14%,
+    #A03831 27.5%,
+    #6E2F2C 50.5%,
+    #63506B 72.5%,
+    #536AAD 86%,
+    #4478E6 100%
+  );
 }
 
-/* B - Safari */
 body.safari {
-    background: linear-gradient(180deg, #E492E0 0%, #9F669C 25%, #681A3D 50.5%, #3C391F 76.5%, #364F04 100%);
+  background: linear-gradient(
+    180deg,
+    #E492E0 0%,
+    #9F669C 25%,
+    #681A3D 50.5%,
+    #3C391F 76.5%,
+    #364F04 100%
+  );
 }
 
-/* C - Firefox */
 body.firefox {
-    background: linear-gradient(180deg, #F5ED5D 0%, #F78C3A 25%, #2D2455 50.5%, #655B91 76.5%, #3B51B9 100%);
+  background: linear-gradient(
+    180deg,
+    #F5ED5D 0%,
+    #F78C3A 25%,
+    #2D2455 50.5%,
+    #655B91 76.5%,
+    #3B51B9 100%
+  );
 }
+
+/* --- 전체 레이아웃 구조 --- */
 .container {
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 상단 배너 */
+.banner {
+  background-color: #000;
+  color: #fff;
+  height: 20px;
+  flex: 0 0 20px;
+  display: flex;
+}
+
+/* 본문 영역 */
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 좌우 영역 비율 */
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  animation-duration: 15s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+/* 왼쪽이 커졌다 줄어드는 애니메이션 */
+@keyframes flexChange {
+  0%   { flex-basis: 90%; }
+  100% { flex-basis: 10%; }
+}
+
+/* 오른쪽이 반대로 커졌다 줄어드는 애니메이션 */
+@keyframes flexChangeReverse {
+  0%   { flex-basis: 10%; }
+  100% { flex-basis: 90%; }
 }
 
 .left {
-    flex: 10;
+  flex: 1 1 90%;
+  animation-name: flexChange;
 }
+
 .right {
-    flex: 0;
+  flex: 1 1 10%;
+  animation-name: flexChangeReverse;
 }
 
-img {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-.hide {
-    display: none;
+/* 좌우 내부의 위아래 영역 */
+.top-left, .bottom-left,
+.top-right, .bottom-right {
+  flex: 1;
+  overflow: hidden;
+  animation-duration: 15s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
 }
 
+/* 위쪽이 커졌다 줄어드는 애니메이션 */
 @keyframes heightChange {
-    0% {
-        height: 10vh;
-    }
-    50% {
-        height: 80vh;
-    }
-    100% {
-        height: 20vh;
-    }
+  0%   { flex-basis: 10%; }
+  50%  { flex-basis: 80%; }
+  100% { flex-basis: 20%; }
 }
 
+/* 아래쪽이 반대로 움직이는 애니메이션 */
 @keyframes heightChangeReverse {
-    0% {
-        height: 90vh;
-    }
-    50% {
-        height: 20vh;
-    }
-    100% {
-        height: 80vh;
-    }
+  0%   { flex-basis: 90%; }
+  50%  { flex-basis: 20%; }
+  100% { flex-basis: 80%; }
 }
 
-@keyframes flexChange {
-    0% {
-        flex: 10;
-    }
-    100% {
-        flex: 0;
-    }
-}
-
-@keyframes flexChangeReverse {
-    0% {
-        flex: 0;
-    }
-    100% {
-        flex: 10;
-    }
-}
-
-.top-left, .bottom-left, .top-right, .bottom-right {
-    animation-duration: 15s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
+/* 위/아래 영역에 애니메이션 연결 */
 .top-left, .top-right {
-    animation-name: heightChange;
+  flex: 1 1 10%;
+  animation-name: heightChange;
 }
 
 .bottom-left, .bottom-right {
-    animation-name: heightChangeReverse;
+  flex: 1 1 90%;
+  animation-name: heightChangeReverse;
 }
 
-/* 전체 높이 애니메이션이 끝난 후 flex 변경 */
-.left, .right {
-    animation-delay: 0s;
-    animation-duration: 15s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
+/* 이미지 공통 스타일 */
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.left {
-    animation-name: flexChange;
+/* 숨김 처리 */
+.hide {
+  display: none;
 }
 
-.right {
-    animation-name: flexChangeReverse;
+/* 텍스트 공백 제거 */
+p {
+  margin: 0;
+  padding: 0;
 }
