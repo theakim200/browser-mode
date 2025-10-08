@@ -57,9 +57,9 @@ if (browser === "chrome") {
 const bannerText = document.querySelector(".banner p");
 
 if (browser === "chrome") {
-    bannerText.textContent = "You are in Chrome.";
+    bannerText.textContent = "You are in Chrome";
 } else if (browser === "safari") {
-    bannerText.textContent = "You are in Safari.";
+    bannerText.textContent = "You are in Safari";
 } else if (browser === "firefox") {
-    bannerText.textContent = "You are in Firefox.";
+    bannerText.textContent = "You are in Firefox";
 }

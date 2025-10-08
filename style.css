@@ -70,10 +70,10 @@ body.firefox {
 .banner {
   background-color: #000;
   color: #fff;
-  height: 20px;
-  flex: 0 0 20px;
+  height: 24px;
+  flex: 0 0 24px;
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   align-items: center;
 }
 
