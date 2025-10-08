@@ -1,9 +1,17 @@
+@font-face {
+    font-family: 'myFont';
+    src: url('./font/font-light.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
 /* 기본 리셋 */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow: hidden; /* 스크롤 방지 */
+  font-family: 'myFont', sans-serif;
 }
 
 /* 전체 화면 배경 + flex 컨테이너 */
@@ -65,6 +73,8 @@ body.firefox {
   height: 20px;
   flex: 0 0 20px;
   display: flex;
+  font-size: 12px;
+  align-items: center;
 }
 
 /* 본문 영역 */
