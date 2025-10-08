@@ -6,21 +6,28 @@ function detectBrowser() {
     
     // 디버깅: userAgent 전체 출력
     console.log("Full userAgent:", userAgent);
-    console.log("Contains Firefox?", userAgent.indexOf("Firefox") > -1);
-    console.log("Contains Chrome?", userAgent.indexOf("Chrome") > -1);
-    console.log("Contains Safari?", userAgent.indexOf("Safari") > -1);
     
-    // Firefox 먼저 체크
-    if (userAgent.indexOf("Firefox") > -1) {
+    // iOS Firefox 체크
+    if (userAgent.indexOf("FxiOS") > -1) {
+        console.log("Detected: Firefox (iOS)");
+        return "firefox";
+    }
+    // iOS Chrome 체크
+    else if (userAgent.indexOf("CriOS") > -1) {
+        console.log("Detected: Chrome (iOS)");
+        return "chrome";
+    }
+    // 데스크탑 Firefox 체크
+    else if (userAgent.indexOf("Firefox") > -1) {
         console.log("Detected: Firefox");
         return "firefox";
     }
-    // Chrome 체크 (Edge 제외)
+    // 데스크탑 Chrome 체크 (Edge 제외)
     else if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edg") === -1) {
         console.log("Detected: Chrome");
         return "chrome";
     }
-    // Safari 체크 (Chrome이 없을 때만)
+    // Safari 체크
     else if (userAgent.indexOf("Safari") > -1) {
         console.log("Detected: Safari");
         return "safari";
